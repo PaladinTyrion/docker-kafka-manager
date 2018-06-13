@@ -36,6 +36,8 @@ RUN mkdir -p /tmp && \
     unzip -d / ./target/universal/kafka-manager-${KM_VERSION}.zip && \
     rm -fr /tmp/* /root/.sbt /root/.ivy2 && \
     apt-get autoremove -y wget curl unzip sbt
+    
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 COPY start-kafka-manager.sh /kafka-manager-${KM_VERSION}/start-kafka-manager.sh
 RUN chmod +x /kafka-manager-${KM_VERSION}/start-kafka-manager.sh
