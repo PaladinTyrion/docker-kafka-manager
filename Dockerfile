@@ -24,10 +24,9 @@ RUN curl -L -o /opt/sbt-$SBT_VERSION.deb "https://dl.bintray.com/sbt/debian/sbt-
     dpkg -i /opt/sbt-${SBT_VERSION}.deb && \
     rm -f /opt/sbt-${SBT_VERSION}.deb && \
     apt-get update && \
-    apt-get install sbt
-
-# Install kafka-manager
-RUN mkdir -p /tmp && \
+    apt-get install sbt && \
+    # Install kafka-manager
+    mkdir -p /tmp && \
     cd /tmp && \
     wget -q https://github.com/yahoo/kafka-manager/archive/${KM_VERSION}.tar.gz && \
     tar zxf ${KM_VERSION}.tar.gz && \
@@ -35,8 +34,8 @@ RUN mkdir -p /tmp && \
     sbt clean dist && \
     unzip -d / ./target/universal/kafka-manager-${KM_VERSION}.zip && \
     rm -fr /tmp/* /root/.sbt /root/.ivy2 && \
-    apt-get autoremove -y wget curl unzip sbt
-    
+    apt-get autoremove -y wget curl unzip sbt && apt-get clean -y
+
 RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 
 COPY start-kafka-manager.sh /kafka-manager-${KM_VERSION}/start-kafka-manager.sh
