@@ -2,8 +2,8 @@ FROM java:8-jdk
 
 MAINTAINER paladintyrion <paladintyrion@gmail.com>
 
-ENV SCALA_VERSION 2.11.8
-ENV SBT_VERSION 0.13.9
+ENV SCALA_VERSION 2.11.12
+# ENV SBT_VERSION 0.13.9
 ENV ZK_HOSTS=0.0.0.0:2181
 ENV KM_VERSION=1.3.3.17
 ENV KM_CONFIGFILE="conf/application.conf"
@@ -19,11 +19,11 @@ RUN set -x && \
     mkdir -p /opt && \
     curl -fsL https://downloads.lightbend.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /opt && \
     # Install sbt
-    curl -L -o /opt/sbt-$SBT_VERSION.deb "https://dl.bintray.com/sbt/debian/sbt-${SBT_VERSION}.deb" && \
-    dpkg -i /opt/sbt-${SBT_VERSION}.deb && \
-    rm -f /opt/sbt-${SBT_VERSION}.deb && \
+    echo "deb https://dl.bintray.com/sbt/debian /" | sudo tee -a /etc/apt/sources.list.d/sbt.list && \
+    apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 2EE0EA64E40A89B84B2DF73499E82A75642AC823 && \
     apt-get update && \
     apt-get install sbt && \
+    sbt --version && \
     # Install kafka-manager
     mkdir -p /tmp && \
     cd /tmp && \
