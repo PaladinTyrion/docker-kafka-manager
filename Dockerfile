@@ -18,12 +18,10 @@ RUN set -x && \
     # Install scala
     mkdir -p /opt && \
     curl -fsL https://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /opt && \
-    scala -version && \
     # Install sbt
     curl -L -o /opt/sbt-$SBT_VERSION.deb "https://dl.bintray.com/sbt/debian/sbt-${SBT_VERSION}.deb" && \
     dpkg -i /opt/sbt-${SBT_VERSION}.deb && \
     rm -f /opt/sbt-${SBT_VERSION}.deb && \
-    sbt sbt-version && \
     apt-get remove -y curl && \
     apt-get autoremove -y && apt-get autoclean -y && \
     set +x
