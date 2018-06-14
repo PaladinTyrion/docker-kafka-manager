@@ -22,7 +22,6 @@ RUN set -x && \
     curl -L -o /opt/sbt-$SBT_VERSION.deb "https://dl.bintray.com/sbt/debian/sbt-${SBT_VERSION}.deb" && \
     dpkg -i /opt/sbt-${SBT_VERSION}.deb && \
     rm -f /opt/sbt-${SBT_VERSION}.deb && \
-    sbt --version && \
     # Install kafka-manager
     mkdir -p /tmp && \
     cd /tmp && \
