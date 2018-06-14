@@ -1,7 +1,7 @@
 FROM java:8-jdk
 MAINTAINER paladintyrion <paladintyrion@gmail.com>
 
-ENV SCALA_VERSION 2.11.8
+ENV SCALA_VERSION 2.11.11
 ENV SBT_VERSION 0.13.9
 ENV ZK_HOSTS=0.0.0.0:2181
 ENV KM_VERSION=1.3.3.17
@@ -17,7 +17,7 @@ RUN set -x && \
     ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     # Install scala
     mkdir -p /opt && \
-    curl -fsL https://downloads.lightbend.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /opt && \
+    curl -fsL https://downloads.typesafe.com/scala/$SCALA_VERSION/scala-$SCALA_VERSION.tgz | tar xfz - -C /opt && \
     scala -version && \
     # Install sbt
     curl -L -o /opt/sbt-$SBT_VERSION.deb "https://dl.bintray.com/sbt/debian/sbt-${SBT_VERSION}.deb" && \
